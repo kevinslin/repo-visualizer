@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as core from '@actions/core';
 import { VaultUtils } from '@dendronhq/common-all';
 import { DendronEngineV2 } from '@dendronhq/engine-server';
@@ -6,11 +8,11 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { processDir } from './process-dendron-notes';
 import { Tree } from "./Tree";
+import yargs from "yargs";
+import {hideBin} from "yargs/helpers"
 
-
-
-function collectInput() {
-    const rootPath = core.getInput("root_path") || "../../workspaces/org-workspace"; 
+function collectInput(args: InputArgs) {
+  const rootPath = args.wsRoot;
   const maxDepth = core.getInput("max_depth") || 9;
   const customFileColors = JSON.parse(core.getInput("file_colors") || "{}");
   const colorEncoding = core.getInput("color_encoding") || "type";
@@ -36,7 +38,7 @@ function collectInput() {
   };
 }
 
-async function main() {
+async function main(args: InputArgs) {
   console.log("start");
   const {
     rootPath,
@@ -45,7 +47,7 @@ async function main() {
     maxDepth,
     colorEncoding,
     customFileColors,
-  } = collectInput();
+  } = collectInput(args);
 
   const engine = DendronEngineV2.create({ wsRoot: rootPath });
   await engine.init();
@@ -72,4 +74,18 @@ async function main() {
   console.log(JSON.stringify(resp, null, 2));
 }
 
-main();
+
+type InputArgs = {
+  wsRoot: string
+}
+
+const args: InputArgs = yargs(hideBin(process.argv))
+  .option('wsRoot', {
+    alias: 'r',
+    type: 'string',
+    description: 'worskpace root',
+    required: true
+  })
+  .parse()
+
+main(args);

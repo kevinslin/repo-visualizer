@@ -1,7 +1,7 @@
 require('esbuild').build({
   entryPoints: ['./src/dendron.tsx'],
   bundle: true,
-	target: 'es2019',
+	target: 'es2020',
 	platform: "node",
   outfile: 'dendron.js',
 	plugins: [],
