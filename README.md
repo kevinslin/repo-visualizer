@@ -1,10 +1,37 @@
-# Repo Visualizer
+# Dendron Repo Visualizer
 
-A GitHub Action that creates an SVG diagram of your repo. Read more [in the writeup](https://octo.github.com/projects/repo-visualization).
+Note: this is a fork of [repo-visualizer](https://github.com/githubocto/repo-visualizer) with a few adjustments to make it work for Dendron and the CLI. 
 
-**Please note that this is an experiment. If you have feature requests, please submit a PR or fork and use the code any way you need.**
+## Quickstart
 
-For a full demo, check out the [githubocto/repo-visualizer-demo](https://github.com/githubocto/repo-visualizer-demo) repository.
+Install dependencies
+
+```sh
+# install and build dependencies
+yarn
+node build.js
+```
+
+Generate your own
+
+```sh
+node dendron.js -r {relative-path-to-repo}
+```
+## Inputs
+
+- -r | --wsRoot : root of your dendron workspace
+
+## Outputs
+
+### `svg`
+
+The contents of the diagram as text. This can be used if you don't want to handle new files.
+
+### diagram-${vaultName}.svg
+
+output of the svg 
+
+<!-- A GitHub Action that creates an SVG diagram of your repo. Read more [in the writeup](https://octo.github.com/projects/repo-visualization).
 
 ## Inputs
 
@@ -87,53 +114,3 @@ You can customize the colors for specific file extensions. Key/value pairs will 
 For example: '{"js": "red","ts": "green"}'
 default: '{}'
 
-## Outputs
-
-### `svg`
-
-The contents of the diagram as text. This can be used if you don't want to handle new files.
-
-## Example usage
-
-You'll need to run the `actions/checkout` Action beforehand, to check out the code.
-
-```yaml
-- name: Checkout code
-  uses: actions/checkout@master
-- name: Update diagram
-  uses: githubocto/repo-visualizer@0.7.1
-  with:
-    output_file: "images/diagram.svg"
-    excluded_paths: "dist,node_modules"
-```
-
-
-## Accessing the diagram
-
-By default, this action will create a new commit with the diagram on the specified branch.
-
-If you want to avoid new commits, you can create an artifact to accompany the workflow run,
-by specifying an `artifact_name`. You can then download the diagram using the
-[`actions/download-artifact`](https://github.com/marketplace/actions/download-a-build-artifact)
-action from a later step in your workflow,
-or by using the [GitHub API](https://docs.github.com/en/rest/reference/actions#artifacts).
-
-Example:
-```yaml
-- name: Update diagram
-  id: make_diagram
-  uses: githubocto/repo-visualizer@0.7.1
-  with:
-    output_file: "output-diagram.svg"
-    artifact_name: "my-diagram"
-- name: Get artifact
-  uses: actions/download-artifact@v2
-  with:
-    name: "my-diagram"
-    path: "downloads"
-```
-In this example, the diagram will be available at downloads/my-diagram.svg
-Note that this will still also create a commit, unless you specify `should_push: false`!
-
-Alternatively, the SVG description of the diagram is available in the `svg` output,
-which you can refer to in your workflow as e.g. `${{ steps.make_diagram.outputs.svg }}`.

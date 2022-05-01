@@ -24,7 +24,7 @@ const main = async () => {
 
 
   // const rootPath = core.getInput("root_path") || "../../workspaces/org-workspace-export"; 
-  const rootPath = core.getInput("root_path") || "../../workspaces/org-workspace-export/dendron.handbook"; 
+  const rootPath = core.getInput("root_path") || "../../workspaces/org-workspace-export/org-private"; 
   const maxDepth = core.getInput("max_depth") || 9
   const customFileColors = JSON.parse(core.getInput("file_colors") ||  '{}');
   const colorEncoding = core.getInput("color_encoding") || "number-of-changes"
