@@ -2,6 +2,9 @@
 
 Note: this is a fork of [repo-visualizer](https://github.com/githubocto/repo-visualizer) with a few adjustments to make it work for Dendron and the CLI. 
 
+You can see what this looks like with [Dendron Wiki](https://wiki.dendron.so/) below:
+
+![Dendron Site](./diagram-dendron.dendron-site.svg)
 ## Quickstart
 
 Install dependencies
@@ -17,6 +20,22 @@ Generate your own
 ```sh
 node dendron.js -r {relative-path-to-repo}
 ```
+
+Example:
+
+```
+- repo-visualizer/
+- dendron-workspace/
+	- dendron.yml
+	- vault
+```
+
+```sh
+cd repo-visualizer
+node dendron.js -r ../dendron-workspace
+# output will be in `diagram-vault.svg`
+```
+
 ## Inputs
 
 - -r | --wsRoot : root of your dendron workspace

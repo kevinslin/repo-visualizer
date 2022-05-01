@@ -44,11 +44,12 @@ export const processDir = async ({
 	}
 
   const getFileStats = async (note: NoteProps) => {
+    const suffix = isDir(note) ? "" : ".md";
 		const name = DNodeUtils.basename(note.fname);
     const size = note.body.length;
     return {
       name,
-      path: note.fname,
+      path: note.fname + suffix,
       size,
     };
   };

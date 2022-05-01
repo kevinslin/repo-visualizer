@@ -2,3 +2,4 @@ node_modules
 *.svg
 dendron.js
 .DS_STORE
+!diagram-dendron.dendron-site.svg
