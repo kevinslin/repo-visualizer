@@ -1,14 +1,12 @@
-import { exec } from '@actions/exec'
-import * as core from '@actions/core'
-import * as artifact from '@actions/artifact'
+import * as core from '@actions/core';
+import { VaultUtils } from '@dendronhq/common-all';
+import { DendronEngineV2 } from '@dendronhq/engine-server';
+import fs from "fs";
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import fs from "fs"
-
-import { Tree } from "./Tree.tsx"
-import { DendronEngineV2 } from '@dendronhq/engine-server';
 import { processDir } from './process-dendron-notes';
-import { VaultUtils } from '@dendronhq/common-all';
+import { Tree } from "./Tree";
+
 
 
 function collectInput() {
