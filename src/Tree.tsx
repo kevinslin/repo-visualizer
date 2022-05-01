@@ -29,7 +29,7 @@ import {
 
 type Props = {
   data: FileType;
-  filesChanged: string[];
+  filesChanged?: string[];
   maxDepth: number;
   colorEncoding: "type" | "number-of-changes" | "last-change"
   customFileColors?: { [key: string]: string };

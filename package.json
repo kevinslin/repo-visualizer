@@ -1,6 +1,7 @@
 {
   "scripts": {
     "build": "node_modules/.bin/esbuild --target=es2019 ./src/index.jsx --bundle --platform=node --outfile=index.js",
+    "buildDendron": "node_modules/.bin/esbuild --target=es2019 ./src/dendron.ts --bundle --platform=node --outfile=dendron.js",
     "prepare": "husky install",
     "typecheck": "yarn run tsc --noEmit --allowJs",
     "test:jest": "jest",
@@ -12,6 +13,8 @@
     "@actions/artifact": "^0.5.2",
     "@actions/core": "^1.4.0",
     "@actions/exec": "^1.1.0",
+    "@dendronhq/common-all": "^0.92.1",
+    "@dendronhq/engine-server": "^0.92.1",
     "d3": "^7.0.0",
     "esbuild": "^0.12.15",
     "lodash": "^4.17.21",

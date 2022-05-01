@@ -5325,9 +5325,9 @@ var require_glob = __commonJS({
   }
 });
 
-// node_modules/rimraf/rimraf.js
+// node_modules/tmp/node_modules/rimraf/rimraf.js
 var require_rimraf = __commonJS({
-  "node_modules/rimraf/rimraf.js"(exports2, module2) {
+  "node_modules/tmp/node_modules/rimraf/rimraf.js"(exports2, module2) {
     module2.exports = rimraf;
     rimraf.sync = rimrafSync;
     var assert = require("assert");
@@ -26271,11 +26271,11 @@ var main = async () => {
     `${username}@users.noreply.github.com`
   ]);
   core.endGroup();
-  const rootPath = core.getInput("root_path") || "";
+  const rootPath = core.getInput("root_path") || "../../workspaces/org-workspace-export/dendron.handbook";
   const maxDepth = core.getInput("max_depth") || 9;
   const customFileColors = JSON.parse(core.getInput("file_colors") || "{}");
-  const colorEncoding = core.getInput("color_encoding") || "type";
-  const commitMessage = core.getInput("commit_message") || "Repo visualizer: updated diagram";
+  const colorEncoding = core.getInput("color_encoding") || "number-of-changes";
+  const commitMessage = core.getInput("commit_message") || "Repo visualizer: update diagram";
   const excludedPathsString = core.getInput("excluded_paths") || "node_modules,bower_components,dist,out,build,eject,.next,.netlify,.yarn,.git,.vscode,package-lock.json,yarn.lock";
   const excludedPaths = excludedPathsString.split(",").map((str) => str.trim());
   const excludedGlobsString = core.getInput("excluded_globs") || "";

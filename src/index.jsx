@@ -23,10 +23,11 @@ const main = async () => {
   core.endGroup()
 
 
-  const rootPath = core.getInput("root_path") || ""; // Micro and minimatch do not support paths starting with ./
+  // const rootPath = core.getInput("root_path") || "../../workspaces/org-workspace-export"; 
+  const rootPath = core.getInput("root_path") || "../../workspaces/org-workspace-export/dendron.handbook"; 
   const maxDepth = core.getInput("max_depth") || 9
   const customFileColors = JSON.parse(core.getInput("file_colors") ||  '{}');
-  const colorEncoding = core.getInput("color_encoding") || "type"
+  const colorEncoding = core.getInput("color_encoding") || "number-of-changes"
   const commitMessage = core.getInput("commit_message") || "Repo visualizer: update diagram"
   const excludedPathsString = core.getInput("excluded_paths") || "node_modules,bower_components,dist,out,build,eject,.next,.netlify,.yarn,.git,.vscode,package-lock.json,yarn.lock"
   const excludedPaths = excludedPathsString.split(",").map(str => str.trim())
@@ -36,6 +37,7 @@ const main = async () => {
   const excludedGlobs = excludedGlobsString.split(";");
 
   const branch = core.getInput("branch")
+  
   const data = await processDir(rootPath, excludedPaths, excludedGlobs);
 
   const componentCodeString = ReactDOMServer.renderToStaticMarkup(
